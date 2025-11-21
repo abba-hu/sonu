@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>You're Invited — Christmas Party</title>
+
+  <!-- Optional: Google Font (works without extra setup) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body style="color: brown;">
+  <main class="invite-card">
+    <header class="header">
+      <div class="star">★</div>
+      <h1 style="background-color: deeppink;
+      font-family: Arial, Helvetica, sans-serif;
+      animation: both;
+      text-decoration-style: double;
+      font-variant-emoji: emoji;
+      color: hotpink;">You're Invited</h1>
+      <p class="sub">Join us for a cozy Christmas celebration 🎄</p>
+    </header>
+
+    <section class="details">
+      <div class="left">
+        <h2>Christmas Party</h2>
+        <p><strong>When:</strong> December 24, 2025 • 6:00 PM</p>
+        <p><strong>Where:</strong> 143 church, mumbai</p>
+        <p><strong>Dress code:</strong> party / hot</p>
+      </div>
+
+      <div class="right">
+        <img src="C:\Users\Roshani\Pictures\chirstmas.jpg"alt="image" height="600px" widht="600px" id="heroImg" class="hero-image" />
+      </div>
+    </section>
+
+    <section class="message">
+      <h3>Come share joy, food & carols</h3>
+      <p>We'll have hot chocolate, cookies, a small gift exchange, and carols by the fireplace. Family and friends welcome — please fill the  form.</p>
+    </section>
+
+    <section class="party time">
+      <h3>press</h3>
+      <form id="partytimeForm" autocomplete="on">
+        <label>
+          Your name
+          <input type="text" name="name" id="name" placeholder="rose" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" id="email" placeholder="you@example.com" required />
+        </label>
+
+        <label>
+          Attending?
+          <select name="attend" id="attend" required>
+            <option value="">-- choose --</option>
+            <option value="yes">Yes — I'll be there</option>
+            <option value="maybe">Maybe</option>
+            <option value="no">Sorry — can't make it</option>
+          </select>
+        </label>
+
+        <label>
+          Message (optional)
+          <textarea name="message" id="message" rows="3" placeholder="Send a quick note..."></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="submit" id="sendBtn">Send party time</button>
+          <button type="button" id="printBtn">Print Invite</button>
+          <button style="background-color: blanchedalmond;
+           border: 0ch black;
+           box-sizing: content-box;
+           box-shadow: 0ch;
+        </div>
+      </form>
+
+      <div id="response" class="response" aria-live="polite"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Hosted with ♥ — See you under the chirstmas tree</p>
+      <p class="small">Questions? Call or text: (+91)9324558078</p>
+      <p>website <link:invitationfriend class="com"></link:invitationfriend></p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Generate shareable link
+    function getLink() {
+        return window.location.href;
+    }
+
+    document.getElementById("inviteLink").textContent = getLink();
+
+    // Copy button
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(getLink());
+            alert("Link copied!");
+        } catch {
+            alert("Copy failed. Copy manually.");
+        }
+    });
+
+    // RSVP handler
+    document.getElementById("rsvpForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const guests = document.getElementById("guests").value;
+        const msg = document.getElementById("msg").value;
+
+        // Set up email RSVP
+        const subject = encodeURIComponent("Christmas Party RSVP - " + name);
+        const body = encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\nGuests: ${guests}\nMessage: ${msg}`
+        );
+
+        window.location.href = `mailto:organizer@example.com?subject=${subject}&body=${body}`;
+        document.getElementById("status").textContent = "Opening email app...";
+    });
+</script>
+
+</body>
+</html>
+
